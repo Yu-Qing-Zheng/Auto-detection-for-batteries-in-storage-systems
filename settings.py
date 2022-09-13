@@ -1,4 +1,5 @@
 # get_current_time()
+from difflib import restore
 from threading import current_thread
 
 
@@ -309,7 +310,8 @@ filter_for_energy_calculation = {
 
 # energy_trigger
 day_threshold = 7
-threshold_factor = 1
+threshold_factor = 0.8
+restored_threshold_factor = 2
 time_fill1 = ' 00:00:00'
 time_fill2 = ' 23:59:59'
 filename_energy_trigger = './median_max_energy.csv'

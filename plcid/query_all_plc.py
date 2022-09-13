@@ -1,10 +1,11 @@
-from cgitb import reset
 import datetime
 import os
 import pandas as pd
 from clock.get_current_time import get_current_time
 from plcid.mysql_model import *
 from settings import plc_csv_path, plc_csv_file, plc_query_control_file, fmt1, day_threshold
+import warnings
+warnings.filterwarnings('ignore')
 
 def query_all_plc():
     today = datetime.datetime.now().day
@@ -40,6 +41,7 @@ def query_all_plc():
                 to_append = pd.DataFrame({'time': now_time, 'plc': \
                                           [query_result[i]], 'restored_flag': [0]})
             df_plc_new_list = df_plc_new_list.append(to_append)
+            # df_plc_new_list = pd.concat([df_plc_new_list, to_append], axis=0, ignore_index=True)
         df_plc_new_list = df_plc_new_list.loc[:, ~df_plc_new_list.columns.str.contains("^Unnamed")]
         df_plc_new_list.to_csv(plc_csv_path+plc_csv_file)
     else:
@@ -47,10 +49,11 @@ def query_all_plc():
             to_append = pd.DataFrame({'time': now_time, \
                                       'plc': [query_result[i]], 'restored_flag': [0]})
             df_plc_new_list = df_plc_new_list.append(to_append)
+            # df_plc_new_list = pd.concat([df_plc_new_list, to_append], axis=0, ignore_index=True)
         df_plc_new_list = df_plc_new_list.loc[:, ~df_plc_new_list.columns.str.contains("^Unnamed")]
         df_plc_new_list.to_csv(plc_csv_path+plc_csv_file)
 
     last_update = open(plc_csv_path+plc_query_control_file, 'w')
     last_update.write(str(today))
-    return df_plc_new_list['plc'].values 
+    return df_plc_new_list['plc'].values
 

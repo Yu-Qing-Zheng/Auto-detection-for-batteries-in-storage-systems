@@ -1,10 +1,9 @@
-from difflib import restore
 from clock.get_current_time import get_current_time
 from clock.time_count import time_count
 from energy.maximum_energy_calculate import maximum_energy_calculate
 from energy.energy_threshold import energy_threshold
 from mongodb.query_request import query_request
-from settings import day_threshold, threshold_factor, \
+from settings import day_threshold, threshold_factor, restored_threshold_factor, \
                      filter_for_energy_threshold, fmt1, plc_csv_path, plc_csv_file
 from mongodb.mongo_insert import mongo_insert
 import datetime
@@ -29,9 +28,9 @@ def energy_trigger(plc):
         else:
             median_max_f = -1
             median_max_r = -1
-        energy_flag = 1
+        energy_flag = -1
         mongo_insert.energy_threshold_insert(plc=plc[0], 
-                                             time=now_time_ts, 
+                                             time=now_time_ts,
                                              median_max_forward=median_max_f, 
                                              median_max_reverse=median_max_r)
     else:
@@ -53,6 +52,13 @@ def energy_trigger(plc):
                         energy_flag = 1
                     else:
                         print('no need for a diagnose!')
+                    if forward_now > restored_threshold_factor*median_max_f \
+                        or reverse_now > restored_threshold_factor*median_max_r:
+                        print('outdated threshold!')
+                        col_restored_flag = df_plc_list.columns.get_loc('restored_flag')
+                        df_plc_list.iloc[index_to_modify, col_restored_flag] = 1
+                        df_plc_list = df_plc_list.loc[:, ~df_plc_list.columns.str.contains("^Unnamed")]
+                        df_plc_list.to_csv(plc_csv_path+plc_csv_file)
                 else:
                     print('no validated threshold!')
                     index_to_modify = df_plc_list[df_plc_list['plc']==plc[0]].index.values[0]
@@ -60,7 +66,6 @@ def energy_trigger(plc):
                     df_plc_list.iloc[index_to_modify, col_restored_flag] = 1
                     df_plc_list = df_plc_list.loc[:, ~df_plc_list.columns.str.contains("^Unnamed")]
                     df_plc_list.to_csv(plc_csv_path+plc_csv_file)
-
             else:
                 print('no threshold found!')
                 index_to_modify = df_plc_list[df_plc_list['plc']==plc[0]].index.values[0]

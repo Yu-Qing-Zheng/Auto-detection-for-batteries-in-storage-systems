@@ -4,6 +4,8 @@ from energy.current_parameter import current_parameter
 import pandas as pd
 import numpy as np
 import datetime
+import warnings
+warnings.filterwarnings('ignore')
 
 
 def median_energy_calculate(start_time, end_time, plc):
@@ -64,6 +66,7 @@ def median_energy_calculate(start_time, end_time, plc):
                 # print(data_df.iloc[i, t_index], data_df.iloc[i, I_index], I_static_flag, I_flag)
                 if I_static_flag*I_flag == -1 or former_I_flag*I_flag == -1 or i == (end-1):
                     data_df_static = data_df_static.append(data_df.iloc[i, :])
+                    # data_df_static = pd.concat([data_df_static, data_df.iloc[i, :]], axis=0, ignore_index=True)
                     static_flag_changing = 1
             data_df_static = data_df_static.drop_duplicates()
             if data_df_static.shape[0] > 1:
@@ -80,9 +83,12 @@ def median_energy_calculate(start_time, end_time, plc):
                     max_E_r = data_df_one_day['reverse.diff'].max()
                     to_append = pd.DataFrame({'time': [str(ts)], 'max_forward': [max_E_f], 'max_reverse': [max_E_r]})
                     df_results = df_results.append(to_append)
+                    # df_results = pd.concat([df_results,to_append], axis=0, ignore_index=True)
                     ts = st
-                med_max_f = round(df_results['max_forward'].median(), 2)
-                med_max_r = round(df_results['max_reverse'].median(), 2)
+                # med_max_f = round(df_results['max_forward'].median(), 2)
+                # med_max_r = round(df_results['max_reverse'].median(), 2)
+                med_max_f = round(df_results['max_forward'].max(), 2)
+                med_max_r = round(df_results['max_reverse'].max(), 2)
                 med_results = [med_max_f, med_max_r]
     return med_results
             
