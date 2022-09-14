@@ -1,6 +1,6 @@
 ## 运行条件
 > 列出运行该项目所必须的条件和相关依赖  
-pip install -r requirements.txt
+1. pip install -r requirements.txt
 
 
 
