@@ -1,9 +1,12 @@
 APScheduler==3.9.1
 Bottleneck @ file:///C:/Windows/Temp/abs_3198ca53-903d-42fd-87b4-03e6d03a8381yfwsuve8/croots/recipe/bottleneck_1657175565403/work
 certifi @ file:///C:/Windows/TEMP/abs_e9b7158a-aa56-4a5b-87b6-c00d295b01fanefpc8_o/croots/recipe/certifi_1655968940823/work/certifi
+charset-normalizer==2.1.1
 cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
+DingtalkChatbot==1.5.3
 fonttools==4.25.0
 greenlet==1.1.3
+idna==3.4
 kiwisolver @ file:///C:/ci/kiwisolver_1653292359073/work
 matplotlib @ file:///C:/ci/matplotlib-suite_1660169687702/work
 mkl-fft==1.3.1
@@ -25,6 +28,7 @@ PyQt5-sip @ file:///C:/Windows/Temp/abs_d7gmd2jg8i/croots/recipe/pyqt-split_1659
 python-dateutil @ file:///tmp/build/80754af9/python-dateutil_1626374649649/work
 pytz @ file:///C:/Windows/TEMP/abs_90eacd4e-8eff-491e-b26e-f707eba2cbe1ujvbhqz1/croots/recipe/pytz_1654762631027/work
 pytz-deprecation-shim==0.1.0.post0
+requests==2.28.1
 scipy @ file:///C:/ci/scipy_1661354257555/work
 sip @ file:///C:/Windows/Temp/abs_b8fxd17m2u/croots/recipe/sip_1659012372737/work
 six @ file:///tmp/build/80754af9/six_1644875935023/work
@@ -33,4 +37,5 @@ toml @ file:///tmp/build/80754af9/toml_1616166611790/work
 tornado @ file:///C:/ci/tornado_1662476985533/work
 tzdata==2022.2
 tzlocal==4.2
+urllib3==1.26.12
 wincertstore==0.2

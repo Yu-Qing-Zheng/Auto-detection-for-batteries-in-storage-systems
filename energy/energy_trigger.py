@@ -78,7 +78,7 @@ def energy_trigger(plc):
                 median_max_f = thres_parameter[0]["median_max_forward"]
                 median_max_r = thres_parameter[0]["median_max_reverse"]
                 print('thres_list:', median_max_f, median_max_r)
-                if ~(median_max_f < 0 and median_max_r > 0):
+                if ~(median_max_f > 0 and median_max_r > 0):
                     print('no validated threshold and no maximum forward/reverse calculated!')
                     index_to_modify = df_plc_list[df_plc_list['plc']==plc[0]].index.values[0]
                     col_restored_flag = df_plc_list.columns.get_loc('restored_flag')

@@ -20,6 +20,23 @@ MONGO_USERNAME = 'root'
 MONGO_PWD = 'TMRenergy!'
 MONGO_AUTH_SOURCE = 'admin'
 
+# energy_trigger
+day_threshold = 7
+threshold_factor = 0.8
+restored_threshold_factor = 2
+time_fill1 = ' 00:00:00'
+time_fill2 = ' 23:59:59'
+filename_energy_trigger = './median_max_energy.csv'
+
+# query_all_plc
+plc_csv_path = './plcid_list/'
+plc_csv_file = 'plc_list.csv'
+plc_query_control_file = 'last_update.txt'
+
+# chatbot
+energy_trigger_sender_webhook = 'https://oapi.dingtalk.com/robot/send?access_token=c8c02777586007e8ec0d1b175d8a3ca773fcf730b9d3a5dfde036935e3102d47'
+energy_trigger_sender_secret = 'SECe5b022bf14b2440432177f5f040593c3d8c14467cfc59a52e6ee44fdc782c1d3'
+bot_query_dayrange = 1
 # Query request
 day_interval = 3
 filter_for_data_collection = {
@@ -309,29 +326,19 @@ filter_for_energy_calculation = {
         }
 
 # energy_trigger
-day_threshold = 7
-threshold_factor = 0.8
-restored_threshold_factor = 2
-time_fill1 = ' 00:00:00'
-time_fill2 = ' 23:59:59'
-filename_energy_trigger = './median_max_energy.csv'
 filter_for_energy_threshold = {
             "$project": {
-                "PLC_id": 1,
+                "plc": 1,
                 "time": 1,
                 "median_max_forward": 1, 
                 "median_max_reverse": 1, 
             }
         }
+        
 filter_for_energy_trigger = {
             "$project": {
-                "PLC_id": 1,
+                "plc": 1,
                 "time": 1,
                 "energy_flag": 1, 
             }
         }
-
-# query_all_plc
-plc_csv_path = './plcid_list/'
-plc_csv_file = 'plc_list.csv'
-plc_query_control_file = 'last_update.txt'
