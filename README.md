@@ -8,5 +8,5 @@
 > 说明如何运行和使用你的项目，建议给出具体的步骤说明
 1. 电芯电量异常检测：
 python ./diagnose_trigger_service.py
-2. 钉钉机器人
+2. 钉钉机器人:
 python ./energy_trigger_pusher.py

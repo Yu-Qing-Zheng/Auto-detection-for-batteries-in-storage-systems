@@ -74,12 +74,13 @@ class mychatrobot:
         text_to_alert = ''
         # one_set = plcset
         if len(one_set) > 0:
+            now_time = get_current_time()[0]
             for i in range(0, len(one_set)):
                 plc = [int(one_set[i])]
                 threshold = mychatrobot.get_thresold(plc)
                 max = mychatrobot.get_max(plc)
-                text_report = 'PLC_id:'+str(plc[0])+', \n'+\
+                text_report = now_time+'\n'+'PLC_id:'+str(plc[0])+', \n'+\
                             '[单次充电量标准]forward:'+str(threshold[0])+', \n[单次放电量标准]reverse:'+str(threshold[1])+', \n'+\
-                            '[24小时内最大单次充电量]forward:'+str(max[0])+', \n[24小时内最大单次放电量]reverse:'+str(max[1])+', \n充放电量低于预期。\n######\n'
+                            '[48小时内最大单次充电量]forward:'+str(max[0])+', \n[48小时内最大单次放电量]reverse:'+str(max[1])+', \n充放电量低于预期。\n######\n'
                 text_to_alert += text_report
         mychatrobot.energy_trigger_sender(text_to_alert)

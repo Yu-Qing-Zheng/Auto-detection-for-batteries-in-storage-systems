@@ -22,6 +22,7 @@ MONGO_AUTH_SOURCE = 'admin'
 
 # energy_trigger
 day_threshold = 7
+day_interval = 2
 threshold_factor = 0.8
 restored_threshold_factor = 2
 time_fill1 = ' 00:00:00'
@@ -37,8 +38,8 @@ plc_query_control_file = 'last_update.txt'
 energy_trigger_sender_webhook = 'https://oapi.dingtalk.com/robot/send?access_token=c8c02777586007e8ec0d1b175d8a3ca773fcf730b9d3a5dfde036935e3102d47'
 energy_trigger_sender_secret = 'SECe5b022bf14b2440432177f5f040593c3d8c14467cfc59a52e6ee44fdc782c1d3'
 bot_query_dayrange = 1
+
 # Query request
-day_interval = 3
 filter_for_data_collection = {
             "$project": {
                 "_id": 0,
