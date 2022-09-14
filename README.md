@@ -10,3 +10,14 @@
 python ./diagnose_trigger_service.py
 2. 钉钉机器人:
 python ./energy_trigger_pusher.py
+
+
+## docker部署
+
+项目目录下运行如下命令
+
+'''
+docker build -f ./dockerfile.yaml  -t auto_diagnose_triger .
+
+docker run --name auto_diagnose_trigger -d auto_diagnose_triger
+'''
