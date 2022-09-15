@@ -1,6 +1,6 @@
 from mongoengine import *
-from utils import logger
-import traceback
+# from utils import logger
+# import traceback
 from mongodb.mongo_model import Datalog, energy_threshold_log, energy_trigger_log
 from mongodb.mongo_connect import mongo_connect
 

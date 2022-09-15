@@ -1,7 +1,7 @@
 from mongodb.mongo_model import energy_trigger_log, energy_threshold_log
 from mongodb.mongo_connect import mongo_connect
-from utils import logger
-import traceback
+# from utils import logger
+# import traceback
 
 class mongo_insert:
     @staticmethod
