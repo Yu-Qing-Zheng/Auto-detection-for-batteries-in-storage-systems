@@ -1,6 +1,7 @@
 from mongodb.query_request import query_request
 from clock.get_current_time import get_current_time
-from settings import fmt1, filter_for_energy_calculation, day_interval
+from settings import fmt1, filter_for_energy_calculation, \
+    day_interval, max_forward_threshold, max_reverse_threshold
 from energy.current_parameter import current_parameter
 import pandas as pd
 import numpy as np
@@ -34,7 +35,7 @@ def maximum_energy_calculate(plc):
         data_df['reverse'] = reverse
         if data_df[abs(data_df['current'])>=current_threshold].shape[0] > 0:
             I_index = data_df.columns.get_loc('current')
-            t_index = data_df.columns.get_loc('time')
+            # t_index = data_df.columns.get_loc('time')
             # f_index = data_df.columns.get_loc('forward')
             # r_index = data_df.columns.get_loc('reverse')
             I_flag = 0
@@ -72,8 +73,20 @@ def maximum_energy_calculate(plc):
                     static_flag_changing = 1
 
             data_df_static = data_df_static.drop_duplicates()
+            data_df_static = data_df_static.reset_index(drop=True)
             if data_df_static.shape[0] > 1:
-                max_forward = round(abs(data_df_static['forward'].diff()).max(), 2)
-                max_reverse = round(abs(data_df_static['reverse'].diff()).max(), 2)
+                data_df_static['forward.diff'] = data_df_static['forward'].diff()
+                data_df_static['reverse.diff'] = data_df_static['reverse'].diff()
+                f_index_to_remove = data_df_static[abs(data_df_static['forward.diff'])>max_forward_threshold].index.values
+                r_index_to_remove = data_df_static[abs(data_df_static['reverse.diff'])>max_reverse_threshold].index.values
+                fdiff_col = data_df_static.columns.get_loc('forward.diff')
+                rdiff_col = data_df_static.columns.get_loc('reverse.diff')
+                data_df_static.iloc[f_index_to_remove, fdiff_col] = 0
+                data_df_static.iloc[r_index_to_remove, rdiff_col] = 0
+                max_forward = round(abs(data_df_static['forward.diff']).max(), 2)
+                max_reverse = round(abs(data_df_static['reverse.diff']).max(), 2)
+                # max_forward = round(abs(data_df_static['forward'].diff()).max(), 2)
+                # max_reverse = round(abs(data_df_static['reverse'].diff()).max(), 2)
                 max_results = [max_forward, max_reverse]
     return max_results
+    # return data_df_static

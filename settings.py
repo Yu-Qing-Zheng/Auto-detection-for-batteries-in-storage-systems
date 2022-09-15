@@ -29,6 +29,10 @@ time_fill1 = ' 00:00:00'
 time_fill2 = ' 23:59:59'
 filename_energy_trigger = './median_max_energy.csv'
 
+# maximum_energy_calculate & median_energy_calculate
+max_forward_threshold = 500
+max_reverse_threshold = 500
+
 # query_all_plc
 plc_csv_path = './plcid_list/'
 plc_csv_file = 'plc_list.csv'
