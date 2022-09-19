@@ -1,3 +1,8 @@
+#-------
+# 仅限于程序不在运行的时间修改settinngs配置文件，以免程序出错。
+#-------
+
+
 # get_current_time()
 from difflib import restore
 from threading import current_thread
@@ -28,6 +33,10 @@ restored_threshold_factor = 2
 time_fill1 = ' 00:00:00'
 time_fill2 = ' 23:59:59'
 filename_energy_trigger = './median_max_energy.csv'
+flag_for_override = -1
+flag_for_normal = 0
+flag_for_abnormal = 1
+flag_for_threshold_calculating = 2
 
 # maximum_energy_calculate & median_energy_calculate
 max_forward_threshold = 500

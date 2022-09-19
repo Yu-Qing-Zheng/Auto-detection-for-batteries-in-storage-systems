@@ -1,44 +1,50 @@
-from re import S
 from dingtalkchatbot.chatbot import DingtalkChatbot
 from energy.maximum_energy_calculate import maximum_energy_calculate
 from mongodb.query_request import query_request
 from clock.get_current_time import get_current_time
 import datetime
+import importlib
 import pandas as pd
-from settings import energy_trigger_sender_webhook, plc_csv_file, plc_csv_path, energy_trigger_sender_secret, \
-    bot_query_dayrange, filter_for_energy_trigger, filter_for_energy_threshold, fmt1
+# from settings import energy_trigger_sender_webhook, plc_csv_file, plc_csv_path, energy_trigger_sender_secret, \
+#     bot_query_dayrange, filter_for_energy_trigger, filter_for_energy_threshold, fmt1
 
 class mychatrobot:
 
     @staticmethod
     def energy_trigger_sender(message):
-        webhook = energy_trigger_sender_webhook
-        secret = energy_trigger_sender_secret
+        settings = importlib.import_module('settings')
+        importlib.reload(settings)
+        webhook = settings.energy_trigger_sender_webhook
+        secret = settings.energy_trigger_sender_secret
         bot = DingtalkChatbot(webhook, secret=secret)
         bot.send_text(msg=message, is_at_all=False)
 
     @staticmethod
     def get_trigger(plc):
+        settings = importlib.import_module('settings')
+        importlib.reload(settings)
         now_time = get_current_time()[0]
-        now_time_ts = datetime.datetime.strptime(now_time, fmt1)
-        start_time_ts = now_time_ts - datetime.timedelta(days=bot_query_dayrange)
+        now_time_ts = datetime.datetime.strptime(now_time, settings.fmt1)
+        start_time_ts = now_time_ts - datetime.timedelta(days=settings.bot_query_dayrange)
         data = query_request.trigger_query(start_time_ts, now_time_ts, plc, \
-            filter_for_energy_trigger)
+            settings.filter_for_energy_trigger)
         if len(data) > 0:
             energy_flag = data[0]['energy_flag']
             return energy_flag
 
     @staticmethod
     def get_thresold(plc):
+        settings = importlib.import_module('settings')
+        importlib.reload(settings)
         forward_threshold = -1
         reverse_threshold = -1
         now_time = get_current_time()[0]
-        now_time_ts = datetime.datetime.strptime(now_time, fmt1)
-        df_plc_list = pd.read_csv(plc_csv_path+plc_csv_file)
+        now_time_ts = datetime.datetime.strptime(now_time, settings.fmt1)
+        df_plc_list = pd.read_csv(settings.plc_csv_path+settings.plc_csv_file)
         start_time = str(df_plc_list[df_plc_list['plc']==plc[0]]['time'].values[0])
-        start_time_ts = datetime.datetime.strptime(start_time, fmt1)
+        start_time_ts = datetime.datetime.strptime(start_time, settings.fmt1)
         data = query_request.threshold_query(start_time_ts, now_time_ts, plc, \
-            filter_for_energy_threshold)
+            settings.filter_for_energy_threshold)
         if len(data) > 0:
             forward_threshold = data[0]['median_max_forward']
             reverse_threshold = data[0]['median_max_reverse']
@@ -57,7 +63,9 @@ class mychatrobot:
     
     @staticmethod
     def energy_trigger_pusher():
-        df_plc = pd.read_csv(plc_csv_path+plc_csv_file)
+        settings = importlib.import_module('settings')
+        importlib.reload(settings)
+        df_plc = pd.read_csv(settings.plc_csv_path+settings.plc_csv_file)
         plcset = df_plc['plc'].values
         minus_set = []
         zero_set = []

@@ -1,8 +1,9 @@
 from mongodb.query_request import query_request
 from clock.get_current_time import get_current_time
-from settings import fmt1, filter_for_energy_calculation, \
-    day_interval, max_forward_threshold, max_reverse_threshold
+# from settings import fmt1, filter_for_energy_calculation, \
+#     day_interval, max_forward_threshold, max_reverse_threshold
 from energy.current_parameter import current_parameter
+import importlib
 import pandas as pd
 import numpy as np
 import datetime
@@ -11,10 +12,12 @@ warnings.filterwarnings('ignore')
 
 
 def maximum_energy_calculate(plc):
+    settings = importlib.import_module('settings')
+    importlib.reload(settings)
     ts = get_current_time()[0]
-    start_time = datetime.datetime.strptime(ts,fmt1) - datetime.timedelta(days=day_interval)
-    end_time = datetime.datetime.strptime(ts,fmt1)
-    data = query_request.datalog_query(start_time, end_time, plc, filter_for_energy_calculation)
+    start_time = datetime.datetime.strptime(ts,settings.fmt1) - datetime.timedelta(days=settings.day_interval)
+    end_time = datetime.datetime.strptime(ts,settings.fmt1)
+    data = query_request.datalog_query(start_time, end_time, plc, settings.filter_for_energy_calculation)
     current_factor = current_parameter(plc)[0]
     current_threshold = current_parameter(plc)[1]
     max_results = []
@@ -77,8 +80,8 @@ def maximum_energy_calculate(plc):
             if data_df_static.shape[0] > 1:
                 data_df_static['forward.diff'] = data_df_static['forward'].diff()
                 data_df_static['reverse.diff'] = data_df_static['reverse'].diff()
-                f_index_to_remove = data_df_static[abs(data_df_static['forward.diff'])>max_forward_threshold].index.values
-                r_index_to_remove = data_df_static[abs(data_df_static['reverse.diff'])>max_reverse_threshold].index.values
+                f_index_to_remove = data_df_static[abs(data_df_static['forward.diff'])>settings.max_forward_threshold].index.values
+                r_index_to_remove = data_df_static[abs(data_df_static['reverse.diff'])>settings.max_reverse_threshold].index.values
                 fdiff_col = data_df_static.columns.get_loc('forward.diff')
                 rdiff_col = data_df_static.columns.get_loc('reverse.diff')
                 data_df_static.iloc[f_index_to_remove, fdiff_col] = 0

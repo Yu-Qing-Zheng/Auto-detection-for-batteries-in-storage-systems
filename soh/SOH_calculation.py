@@ -2,8 +2,6 @@ from soh.xLSalgos import xLSalgos
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
-from matplotlib.dates import MO, TU, WE, TH, FR, SA, SU
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter
 
 filename = '../Abnormal_diagnose/PLC43异常/soh_input/3_8_1.csv' 
