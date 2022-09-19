@@ -13,7 +13,7 @@ fmt2 = "%H:%M:%S"
 fmt3 = "%Y-%m-%d"
 
 # diagnose_trigger_service
-seconds_interval = 30 # 3600
+seconds_interval = 3600
 # time_rigger()
 specified_time = '17:01:00'
 
@@ -36,7 +36,7 @@ filename_energy_trigger = './median_max_energy.csv'
 flag_for_override = -1
 flag_for_normal = 0
 flag_for_abnormal = 1
-flag_for_threshold_calculating = 4
+flag_for_threshold_calculating = 2
 
 # maximum_energy_calculate & median_energy_calculate
 max_forward_threshold = 500
