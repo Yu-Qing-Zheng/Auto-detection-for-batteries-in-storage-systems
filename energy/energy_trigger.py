@@ -12,7 +12,7 @@ import pandas as pd
 
 def energy_trigger(plc):
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     df_plc_list = pd.read_csv(settings.plc_csv_path+settings.plc_csv_file)
     start_time = str(df_plc_list[df_plc_list['plc']==plc[0]]['time'].values[0])
     print('start_time:', start_time)

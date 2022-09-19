@@ -1,5 +1,5 @@
 #-------
-# 仅限于程序不在运行的时间修改settinngs配置文件，以免程序出错。
+# 更新配置文件后于下一次检测生效。
 #-------
 
 
@@ -13,7 +13,7 @@ fmt2 = "%H:%M:%S"
 fmt3 = "%Y-%m-%d"
 
 # diagnose_trigger_service
-seconds_interval = 3600
+seconds_interval = 30 # 3600
 # time_rigger()
 specified_time = '17:01:00'
 
@@ -36,7 +36,7 @@ filename_energy_trigger = './median_max_energy.csv'
 flag_for_override = -1
 flag_for_normal = 0
 flag_for_abnormal = 1
-flag_for_threshold_calculating = 2
+flag_for_threshold_calculating = 4
 
 # maximum_energy_calculate & median_energy_calculate
 max_forward_threshold = 500

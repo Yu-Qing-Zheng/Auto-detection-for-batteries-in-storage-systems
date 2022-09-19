@@ -5,7 +5,7 @@ from energy.trigger_loop import trigger_loop
 import importlib
 
 settings = importlib.import_module('settings')
-importlib.reload(settings)
+# importlib.reload(settings)
 trigger_loop()
 scheduler = BlockingScheduler()
 scheduler.add_job(trigger_loop, 'interval', seconds = settings.seconds_interval)

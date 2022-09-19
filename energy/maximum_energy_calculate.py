@@ -13,7 +13,7 @@ warnings.filterwarnings('ignore')
 
 def maximum_energy_calculate(plc):
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     ts = get_current_time()[0]
     start_time = datetime.datetime.strptime(ts,settings.fmt1) - datetime.timedelta(days=settings.day_interval)
     end_time = datetime.datetime.strptime(ts,settings.fmt1)

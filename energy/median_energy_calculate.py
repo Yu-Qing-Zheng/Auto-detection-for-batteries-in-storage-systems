@@ -11,7 +11,7 @@ warnings.filterwarnings('ignore')
 
 def median_energy_calculate(start_time, end_time, plc):
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     start_time = datetime.datetime.strptime(start_time,settings.fmt1)
     end_time = datetime.datetime.strptime(end_time, settings.fmt1)
     data = query_request.datalog_query(start_time, end_time, plc, settings.filter_for_energy_calculation)

@@ -10,7 +10,7 @@ warnings.filterwarnings('ignore')
 
 def query_all_plc():
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     today = datetime.datetime.now().day
     if os.path.exists(settings.plc_csv_path+settings.plc_query_control_file):
         last_update = open(settings.plc_csv_path+settings.plc_query_control_file, 'r')

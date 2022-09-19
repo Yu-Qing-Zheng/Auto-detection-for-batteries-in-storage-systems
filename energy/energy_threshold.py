@@ -5,7 +5,7 @@ import importlib
 
 def energy_threshold(start_time, plc): 
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     now_time = get_current_time()
     median_max_forward = -1
     median_max_reverse = -1

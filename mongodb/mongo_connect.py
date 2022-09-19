@@ -6,7 +6,7 @@ import importlib
 
 def mongo_connect():
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     try:
         connect(settings.MONGO_DB_NAME, host=settings.MONGO_HOST, port=settings.MONGO_PORT, username=settings.MONGO_USERNAME,
                     password=settings.MONGO_PWD, authentication_source=settings.MONGO_AUTH_SOURCE, connect=True)

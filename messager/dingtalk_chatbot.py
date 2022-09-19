@@ -13,7 +13,7 @@ class mychatrobot:
     @staticmethod
     def energy_trigger_sender(message):
         settings = importlib.import_module('settings')
-        importlib.reload(settings)
+        # importlib.reload(settings)
         webhook = settings.energy_trigger_sender_webhook
         secret = settings.energy_trigger_sender_secret
         bot = DingtalkChatbot(webhook, secret=secret)
@@ -22,7 +22,7 @@ class mychatrobot:
     @staticmethod
     def get_trigger(plc):
         settings = importlib.import_module('settings')
-        importlib.reload(settings)
+        # importlib.reload(settings)
         now_time = get_current_time()[0]
         now_time_ts = datetime.datetime.strptime(now_time, settings.fmt1)
         start_time_ts = now_time_ts - datetime.timedelta(days=settings.bot_query_dayrange)
@@ -35,7 +35,7 @@ class mychatrobot:
     @staticmethod
     def get_thresold(plc):
         settings = importlib.import_module('settings')
-        importlib.reload(settings)
+        # importlib.reload(settings)
         forward_threshold = -1
         reverse_threshold = -1
         now_time = get_current_time()[0]
@@ -64,7 +64,7 @@ class mychatrobot:
     @staticmethod
     def energy_trigger_pusher():
         settings = importlib.import_module('settings')
-        importlib.reload(settings)
+        # importlib.reload(settings)
         df_plc = pd.read_csv(settings.plc_csv_path+settings.plc_csv_file)
         plcset = df_plc['plc'].values
         minus_set = []

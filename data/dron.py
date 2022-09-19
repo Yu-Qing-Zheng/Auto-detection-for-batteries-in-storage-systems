@@ -7,7 +7,7 @@ from mongodb.query_request import query_request
 
 def dron(plc):
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     now_time = get_current_time()
     now_time_ts = datetime.datetime.strptime()
     start_time = 

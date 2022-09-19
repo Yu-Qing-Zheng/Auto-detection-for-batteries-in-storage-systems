@@ -4,7 +4,7 @@ import importlib
 
 def get_current_time():
     settings = importlib.import_module('settings')
-    importlib.reload(settings)
+    # importlib.reload(settings)
     ts = time.time()
     timeArray = time.localtime(ts)
     strtime1 = time.strftime(settings.fmt1, timeArray)
