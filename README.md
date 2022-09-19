@@ -6,10 +6,9 @@
 
 ## 运行说明
 > 说明如何运行和使用你的项目，建议给出具体的步骤说明
-1. 电芯电量异常检测：
+1. 启动电芯电量异常检测&钉钉机器人告警：
+
 python ./diagnose_trigger_service.py
-2. 钉钉机器人:
-python ./energy_trigger_pusher.py
 
 
 ## docker部署
@@ -17,7 +16,9 @@ python ./energy_trigger_pusher.py
 项目目录下运行如下命令
 
 '''
-docker build -f ./dockerfile.yaml  -t auto_diagnose_triger .
+docker volume create code 
 
-docker run --name auto_diagnose_trigger -d auto_diagnose_triger
+docker build -f ./dockerfile.yaml  -t auto_diagnose_trigger_service .
+
+docker run -d -v code:/trigger --name trigger_service auto_diagnose_trigger_service
 '''
