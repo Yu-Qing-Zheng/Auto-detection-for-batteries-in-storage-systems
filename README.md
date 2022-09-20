@@ -15,10 +15,8 @@ python ./diagnose_trigger_service.py
 
 项目目录下运行如下命令
 
-'''
 docker volume create code 
 
 docker build -f ./dockerfile.yaml  -t auto_diagnose_trigger_service .
 
 docker run -d -v code:/trigger --name trigger_service auto_diagnose_trigger_service
-'''

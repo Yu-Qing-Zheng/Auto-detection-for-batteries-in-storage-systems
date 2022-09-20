@@ -53,6 +53,10 @@ energy_trigger_sender_secret = 'SECe5b022bf14b2440432177f5f040593c3d8c14467cfc59
 bot_query_dayrange = 1
 chatrobot_switch = 0
 
+# dron (data reduction)
+pack_num = 10
+battery_num = 24
+
 # Query request
 filter_for_data_collection = {
             "$project": {
@@ -60,6 +64,7 @@ filter_for_data_collection = {
                 "PLC_id": 1,
                 "time": 1,
                 "data": {
+                    "PCS电池电流": 1,
                     "1组1号电池电压": 1,
                     "1组2号电池电压": 1,
                     "1组3号电池电压": 1,
