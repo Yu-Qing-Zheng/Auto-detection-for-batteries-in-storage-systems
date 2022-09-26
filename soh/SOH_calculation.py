@@ -1,13 +1,13 @@
-from soh.xLSalgos import xLSalgos
+from xLSalgos import xLSalgos
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter
 
-filename = '../Abnormal_diagnose/PLC43异常/soh_input/3_8_1.csv' 
-filename = './data/3_12.csv'
+filename = '../Abnormal_diagnose/PLC47/soc_output/10_15.csv' 
+#filename = './data/3_12.csv'
 df_raw = pd.read_csv(filename)
-df_raw = df_raw[(df_raw['Date']>='2022-03-15 00:00')&(df_raw['Date']<'2022-03-16 00:00')]
+df_raw = df_raw#[(df_raw['Date']>='2022-03-15 00:00')&(df_raw['Date']<'2022-03-16 00:00')]
 df_raw['Date'] = pd.to_datetime(df_raw['Date'])
 current = df_raw['Current'].values
 soc = df_raw['SOC'].values
@@ -79,4 +79,4 @@ locator = AutoDateLocator(minticks=4, maxticks=10)
 ax2.xaxis.set_major_locator(locator)
 ax2.xaxis.set_major_formatter(ConciseDateFormatter(locator))
 ax2.set_xlabel('Time')
-plt.savefig('./fig/try.png')
+plt.savefig('./try.png')

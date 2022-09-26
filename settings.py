@@ -4,10 +4,6 @@
 
 
 # get_current_time()
-from difflib import restore
-from threading import current_thread
-
-
 fmt1 = "%Y-%m-%d %H:%M:%S"
 fmt2 = "%H:%M:%S"
 fmt3 = "%Y-%m-%d"
@@ -56,6 +52,8 @@ chatrobot_switch = 0
 # dron (data reduction)
 pack_num = 10
 battery_num = 24
+voltage_coefficient = 1000
+threshold_for_rms = 3.5
 
 # Query request
 filter_for_data_collection = {
