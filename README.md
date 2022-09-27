@@ -17,6 +17,6 @@ python ./diagnose_trigger_service.py
 
 docker volume create code 
 
-docker build -f ./dockerfile.yaml  -t auto_diagnose_trigger_service ./
+docker build -f ./dockerfile.yaml ./ -t auto_diagnose_trigger_service:latest
 
-docker run -d -v code:/trigger --name trigger_service auto_diagnose_trigger_service
+docker run -d -v code:/trigger --name trigger_service auto_diagnose_trigger_service:latest
