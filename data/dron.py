@@ -57,7 +57,7 @@ class dron:
         now_time = get_current_time()[0]
         now_time_ts = datetime.datetime.strptime(now_time, settings.fmt1)
         start_time_ts = now_time_ts - datetime.timedelta(days=settings.day_interval)
-        mongo_connect()
+        # mongo_connect()
         data = query_request.datalog_query(start_time_ts, now_time_ts, plc, \
                                            settings.filter_for_data_collection)
         if len(data) > 0:

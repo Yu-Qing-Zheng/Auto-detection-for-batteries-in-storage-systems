@@ -324,9 +324,16 @@ filter_for_data_collection = {
                     "10组电池温度1": 1,
                     "10组电池温度2": 1,
                 },
+                "record": {
+                            "info": {
+                                "快速充电中": 1,
+                                "放电中": 1,
+                                "充电完成": 1,
+                                "放电完成": 1,
+                            }
+                },
             }
         }
-
 # energy_calculation
 filter_for_energy_calculation = {
             "$project": {
