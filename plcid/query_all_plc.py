@@ -59,4 +59,3 @@ def query_all_plc():
     last_update = open(settings.plc_csv_path+settings.plc_query_control_file, 'w')
     last_update.write(str(today))
     return df_plc_new_list['plc'].values
-

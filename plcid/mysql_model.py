@@ -115,3 +115,16 @@ class Transformer(Base):
 
     ipc = relationship(u'Ipc', primaryjoin='Transformer.ipc_id == Ipc.ipc_id', backref=u'transformers')
     project = relationship(u'Project', primaryjoin='Transformer.project_id == Project.project_id', backref=u'transformers')
+
+class energy_threshold(Base):
+    __tablename__ = 'energy_threshold'
+    plc_id = Column(Integer, primary_key=True, index=True)
+    time = Column(DateTime)
+    median_max_forward = Column(Float)
+    median_max_reverse = Column(Float)
+
+class diagnose_trigger(Base):
+    __tablename__ = 'diagnose_trigger'
+    plc_id = Column(Integer, primary_key=True, index=True)
+    time = Column(DateTime)
+    energy_flag = Column(Integer)
