@@ -4,6 +4,9 @@
 
 
 # get_current_time()
+from mysql.mysql_model import diagnose_trigger
+
+
 fmt1 = "%Y-%m-%d %H:%M:%S"
 fmt2 = "%H:%M:%S"
 fmt3 = "%Y-%m-%d"

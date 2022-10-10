@@ -3,8 +3,8 @@
 # @Date: 2022-03-07
 """
 
-from sqlalchemy.orm import declarative_base, relationship, sessionmaker
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, FetchedValue, create_engine, Float
+from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import Column, Integer, DateTime, create_engine, Float
 
 engine = create_engine('mysql+pymysql://root:123456@47.92.133.142:3306/data_preprocessing?charset=utf8',
                        pool_size=30,

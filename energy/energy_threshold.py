@@ -3,7 +3,7 @@ from energy.median_energy_calculate import median_energy_calculate
 # from settings import time_fill1, time_fill2
 import importlib
 
-def energy_threshold(start_time, plc): 
+def get_energy_threshold(start_time, plc): 
     settings = importlib.import_module('settings')
     # importlib.reload(settings)
     now_time = get_current_time()
