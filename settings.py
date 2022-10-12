@@ -58,6 +58,9 @@ battery_num = 24
 voltage_coefficient = 1000
 threshold_for_rms = 3.5
 
+# soc
+numpoles = 3
+
 # Query request
 filter_for_data_collection = {
             "$project": {

@@ -31,11 +31,3 @@ def dOCVfromSOCtemp(soc,temp,model):
         docv[I3] = docv[I3] + tempcol[I3]*(dOCVrel[I5+1]*omI45 + dOCVrel[I5+2]*I45)
     docv[I6] = 0
     return docv
-
-if __name__ == '__main__':
-    import scipy.io as scio
-    modelFile = './soc/280Ahmodel.mat'
-    model = scio.loadmat(modelFile)
-    model = model['model']
-    result = dOCVfromSOCtemp(1.0, 25, model)
-    print(result)

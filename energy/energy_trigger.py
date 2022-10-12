@@ -48,6 +48,7 @@ def energy_trigger(plc):
         #                       settings.filter_for_energy_threshold)
         mysql_session = get_session()
         thres_parameter = mysql_session.query(energy_threshold).filter(energy_threshold.plc_id==plc).all()
+        mysql_session.close()
         print('max_e_list:', max_e_list)
         if len(max_e_list) > 0:
             forward_now = max_e_list[0]
