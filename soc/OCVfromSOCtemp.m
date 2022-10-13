@@ -55,7 +55,6 @@ function ocv=OCVfromSOCtemp(soc,temp,model)
     ocv(I2) = (soccol(I2)-SOC(end)).*dv(I2)/diffSOC + ...
               OCV0(end)+tempcol(I2).*OCVrel(end);
   end
-
   % for normal soc range, manually interpolate (10x faster than "interp1")
   I4=(soccol(I3)-SOC(1))/diffSOC; % using linear interpolation
   I5=floor(I4); I45 = I4-I5; omI45 = 1-I45;

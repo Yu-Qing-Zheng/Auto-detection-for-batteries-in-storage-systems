@@ -27,7 +27,7 @@ def dOCVfromSOCtemp(soc,temp,model):
         I5 = math.floor(I4)
         I45 = I4 - I5
         omI45 = 1-I45
-        docv[I3] = dOCV0[I5+1]*omI45 + dOCVrel[I5+2]*I45
+        docv[I3] = dOCV0[I5+1]*omI45/dOCV0[I5+1] + dOCV0[I5+2]*I45
         docv[I3] = docv[I3] + tempcol[I3]*(dOCVrel[I5+1]*omI45 + dOCVrel[I5+2]*I45)
     docv[I6] = 0
     return docv

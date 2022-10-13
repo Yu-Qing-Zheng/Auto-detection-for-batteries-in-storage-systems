@@ -29,7 +29,6 @@ scipy==1.7.3
 setuptools==63.4.1
 six==1.16.0
 SQLAlchemy==1.4.41
-torch==1.12.1
 typing_extensions==4.3.0
 tzdata==2022.2
 tzlocal==4.2

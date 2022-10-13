@@ -133,8 +133,8 @@ class dron:
                     df_ab_bat = df_ab_bat.append(df_1t_1p)
                 df_ab_bat = df_ab_bat.sort_values(by='time', ascending=True)
                 df_ab_bat = df_ab_bat.reset_index(drop=True)
-            bat_to_check = df_ab_bat[abs(df_ab_bat['dv'])>settings.threshold_for_rms]['Voltage.name'].unique()
-            return df_1t_1p # bat_to_check
+            bat_to_check = df_ab_bat[abs(df_ab_bat['dv'])>settings.threshold_for_rms]
+            return bat_to_check
         
         
         # if df_data.shape[0] > 0:

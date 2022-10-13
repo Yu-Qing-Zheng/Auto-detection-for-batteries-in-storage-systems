@@ -5,10 +5,12 @@ import numpy as np
 
 def initEKF(v0, T0, SigmaX0, SigmaV, SigmaW, model):
     # initial state description
-    ir0 = np.zeros((1, numpoles))
+    ir0 = np.arange(0,numpoles)
     hk0 = 0
     SOC0 = SOCfromOCVtemp(v0, T0, model)[0].reshape(-1,1)
-    xhat = [ir0, hk0, SOC0]
+    # xhat = np.array([ir0, hk0, SOC0]).reshape(1, -1)
+    xhat = np.append(ir0, hk0)
+    xhat = np.matrix(np.append(xhat, SOC0).reshape(-1,1))
     irInd = list(range(0, numpoles))
     hkInd = np.max(irInd) + 1
     zkInd = hkInd+1

@@ -54,9 +54,11 @@ function [zk,zkbnd,ekfData] = iterEKF(vk,ik,Tk,deltat,ekfData)
   
   % EKF Step 0: Compute Ahat[k-1], Bhat[k-1]
   nx = length(xhat); Ahat = zeros(nx,nx); Bhat = zeros(nx,1);
-  Ahat(zkInd,zkInd) = 1; Bhat(zkInd) = -deltat/(3600*Q);
-  Ahat(irInd,irInd) = diag(RC); Bhat(irInd) = 1-RC(:);
-  Ah  = exp(-abs(I*G*deltat/(3600*Q)));  % hysteresis factor
+  Ahat(zkInd,zkInd) = 1; 
+  Bhat(zkInd) = -deltat/(3600*Q);
+  Ahat(irInd,irInd) = diag(RC);
+  Bhat(irInd) = 1-RC(:);
+  Ah = exp(-abs(I*G*deltat/(3600*Q)));  % hysteresis factor
   Ahat(hkInd,hkInd) = Ah;
   B = [Bhat, 0*Bhat];
   Bhat(hkInd) = -abs(G*deltat/(3600*Q))*Ah*(1+sign(I)*xhat(hkInd));
@@ -87,7 +89,7 @@ function [zk,zkbnd,ekfData] = iterEKF(vk,ik,Tk,deltat,ekfData)
   
   % Step 2b: State estimate measurement update
   r = vk - yhat; % residual.  Use to check for sensor errors...
-  if r^2 > 100*SigmaY, L(:)=0.0; end 
+  if r^2 > 100*SigmaY, L(:)=0.0; end
   xhat = xhat + L*r;
   xhat(hkInd) = min(1,max(-1,xhat(hkInd))); % Help maintain robustness
   xhat(zkInd) = min(1.05,max(-0.05,xhat(zkInd)));
@@ -107,6 +109,6 @@ function [zk,zkbnd,ekfData] = iterEKF(vk,ik,Tk,deltat,ekfData)
   ekfData.priorI = ik;
   ekfData.SigmaX = SigmaX;
   ekfData.xhat = xhat;
-  zk = xhat(zkInd);
-  zkbnd = 3*sqrt(SigmaX(zkInd,zkInd));
+  zk = xhat(zkInd)
+  zkbnd = 3*sqrt(SigmaX(zkInd,zkInd))
 end

@@ -27,7 +27,7 @@ def OCVfromSOCtemp(soc, temp, model):
         I5 = math.floor(I4)
         I45 = I4 - I5
         omI45 = 1-I45
-        ocv[I3] = OCV0[I5+1]*omI45 + OCVrel[I5+2]*I45
+        ocv[I3] = OCV0[I5+1]*omI45 + OCV0[I5+2]*I45
         ocv[I3] = ocv[I3] + tempcol[I3]*(OCVrel[I5+1]*omI45 + OCVrel[I5+2]*I45)
     ocv[I6] = 0
     return ocv

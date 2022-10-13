@@ -59,7 +59,14 @@ voltage_coefficient = 1000
 threshold_for_rms = 3.5
 
 # soc
-numpoles = 3
+model_path = './soc/'
+model_file = '280Ahmodel.mat'
+deltat = 60
+numpoles = 1
+SigmaX0 = [1e-6, 1e-8, 2e-4]
+# SigmaX0 = [1e-6, 1e-6, 1e-6, 1e-8, 2e-4]
+SigmaV = 2e-1
+SigmaW = 2e-1
 
 # Query request
 filter_for_data_collection = {
