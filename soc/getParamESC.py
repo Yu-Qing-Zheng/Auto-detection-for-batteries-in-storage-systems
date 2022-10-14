@@ -1,9 +1,11 @@
 from soc.getfield_mat import getfield_mat
 import numpy as np
 from scipy.interpolate import make_interp_spline
+import importlib
 from settings import numpoles
 
 def getParamESC(paramName,temp,model):
+    settings = importlib.import_module('settings')
     theFields = getfield_mat(model)
     match = paramName in theFields
     if not match:
@@ -46,7 +48,7 @@ def getParamESC(paramName,temp,model):
         else:
             if paramName in ['RCParam', 'RParam']:
                 theParam = np.array([])
-                for i in range(0, numpoles):
+                for i in range(0, settings.numpoles):
                     theParam_i = make_interp_spline(model_temps, theParamData[:,i])(temp)
                     theParam = np.append(theParam, theParam_i)
             else:

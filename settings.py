@@ -60,11 +60,11 @@ threshold_for_rms = 3.5
 
 # soc
 model_path = './soc/'
-model_file = '280Ahmodel1.mat'
+model_file = '280Ahmodel.mat'
 deltat = 60
-numpoles = 3
-# SigmaX0 = [1e-6, 1e-8, 2e-4]
-SigmaX0 = [1e-6, 1e-6, 1e-6, 1e-8, 2e-4]
+numpoles = 1
+SigmaX0 = [1e-6, 1e-8, 2e-4]
+# SigmaX0 = [1e-6, 1e-6, 1e-6, 1e-8, 2e-4]
 SigmaV = 2e-1
 SigmaW = 2e-1
 

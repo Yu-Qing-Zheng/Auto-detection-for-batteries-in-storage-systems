@@ -1,26 +1,25 @@
-from settings import model_path, model_file, SigmaX0, SigmaV, SigmaW, deltat
+# from settings import model_path, model_file, SigmaX0, SigmaV, SigmaW, deltat
 from soc.iterEKF import iterEKF
 from soc.initEKF import initEKF
-from energy.current_parameter import current_parameter
 import scipy.io as scio
 import numpy as np
 import pandas as pd
+import importlib
 
 def runEKF(df):
-    matfile = model_path+model_file
+    settings = importlib.import_module('settings')
+    matfile = settings.model_path+settings.model_file
     model = scio.loadmat(matfile)['model']
     df['time'] = pd.to_datetime(df['time'])
     df = df.sort_values(by='time', ascending=True)
     df = df.reset_index(drop=True)
-    df['time'] = df.index.values*deltat
+    df['Time'] = df.index.values*settings.deltat
     temperature = df['Temperature'].values
     current = df['Current'].values
     voltage = df['Voltage'].values
     sochat = np.array([])
     socbound = np.array([])
-    # sochat = np.zeros(np.size(soc))
-    # socbound = np.zeros(np.size(soc))
-    ekfData = initEKF(voltage[0], temperature[0], np.diag(SigmaX0), SigmaV, SigmaW, model)
+    ekfData = initEKF(voltage[0], temperature[0], np.diag(settings.SigmaX0), settings.SigmaV, settings.SigmaW, model)
     sochat0 = ekfData.xhat[ekfData.zkInd, 0]
     socbound0 = 3*np.sqrt(ekfData.SigmaX[ekfData.zkInd,ekfData.zkInd])
     sochat = np.append(sochat, sochat0)
@@ -29,7 +28,7 @@ def runEKF(df):
         vk = voltage[i]
         ik = current[i]
         Tk = temperature[i]
-        ekfData = iterEKF(vk,ik,Tk,deltat,ekfData)
+        ekfData = iterEKF(vk,ik,Tk,settings.deltat,ekfData)
         sochatk = ekfData.xhat[ekfData.zkInd, 0]
         socboundk = 3*np.sqrt(ekfData.SigmaX[ekfData.zkInd,ekfData.zkInd])
         sochat = np.append(sochat, sochatk)

@@ -2,9 +2,11 @@ from soc.getParamESC import getParamESC
 from soc.dOCVfromSOCtemp import dOCVfromSOCtemp
 from soc.OCVfromSOCtemp import OCVfromSOCtemp
 import numpy as np
-from settings import numpoles
+import importlib
+# from settings import numpoles
 
 def iterEKF(vk, ik, Tk, deltat, ekfData):
+    settings = importlib.import_module('settings')
     model = ekfData.model
     Q  = getParamESC('QParam',Tk,model)
     G  = getParamESC('GParam',Tk,model)
@@ -66,7 +68,7 @@ def iterEKF(vk, ik, Tk, deltat, ekfData):
 
     # Step 1c: Output estimate
     yhat = OCVfromSOCtemp(xhat[zkInd, 0], Tk, model) + M0*signIk + \
-         M*xhat[hkInd, 0] - np.matrix(R.reshape(-1,numpoles))*xhat[irInd] - R0*ik
+         M*xhat[hkInd, 0] - np.matrix(R.reshape(-1,settings.numpoles))*xhat[irInd] - R0*ik
     
     # Step 2a: Estimator gain matrix
     Chat = np.matrix(np.zeros([1, nx]))
@@ -76,7 +78,7 @@ def iterEKF(vk, ik, Tk, deltat, ekfData):
     Dhat = np.matrix(np.zeros([1, 2]))
     Dhat[0, 0] = -R0
     Dhat[0, 1] = M0
-    SigmaY = Chat*SigmaX*Chat.T + Dhat*SigmaV*Dhat.T
+    SigmaY = Chat*SigmaX*Chat.T + SigmaV# Dhat*SigmaV*Dhat.T
     L = SigmaX*Chat.T/SigmaY
     
     # Step 2b: State estimate measurement update
