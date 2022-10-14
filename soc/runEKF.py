@@ -1,6 +1,7 @@
 from settings import model_path, model_file, SigmaX0, SigmaV, SigmaW, deltat
 from soc.iterEKF import iterEKF
 from soc.initEKF import initEKF
+from energy.current_parameter import current_parameter
 import scipy.io as scio
 import numpy as np
 import pandas as pd
@@ -26,7 +27,7 @@ def runEKF(df):
     socbound = np.append(socbound, socbound0)
     for i in range(1, df.shape[0]):
         vk = voltage[i]
-        ik = current[i]/10
+        ik = current[i]
         Tk = temperature[i]
         ekfData = iterEKF(vk,ik,Tk,deltat,ekfData)
         sochatk = ekfData.xhat[ekfData.zkInd, 0]

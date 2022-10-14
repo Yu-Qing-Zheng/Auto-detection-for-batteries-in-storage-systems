@@ -3,7 +3,6 @@ import numpy as np
 import datetime
 import importlib
 from clock.get_current_time import get_current_time
-from mongodb.mongo_connect import mongo_connect
 from mongodb.query_request import query_request
 from energy.current_parameter import current_parameter
 import importlib
@@ -56,6 +55,10 @@ class dron:
         # importlib.reload(settings)
         now_time = get_current_time()[0]
         now_time_ts = datetime.datetime.strptime(now_time, settings.fmt1)
+        d_hour = (now_time_ts.hour+1) % 24
+        now_time_ts -= datetime.timedelta(hours=d_hour)
+        now_time_ts -= datetime.timedelta(minutes=now_time_ts.minute)
+        now_time_ts -= datetime.timedelta(seconds=now_time_ts.second)
         start_time_ts = now_time_ts - datetime.timedelta(days=settings.day_interval)
         # mongo_connect()
         data = query_request.datalog_query(start_time_ts, now_time_ts, plc, \
@@ -133,8 +136,9 @@ class dron:
                     df_ab_bat = df_ab_bat.append(df_1t_1p)
                 df_ab_bat = df_ab_bat.sort_values(by='time', ascending=True)
                 df_ab_bat = df_ab_bat.reset_index(drop=True)
-            bat_to_check = df_ab_bat[abs(df_ab_bat['dv'])>settings.threshold_for_rms]
-            return bat_to_check
+            bat_to_check = df_ab_bat[abs(df_ab_bat['dv'])>settings.threshold_for_rms]['Voltage.name'].unique()
+            df_bat_to_check = df_data[df_data['Voltage.name'].isin(bat_to_check)]
+            return df_bat_to_check
         
         
         # if df_data.shape[0] > 0:
