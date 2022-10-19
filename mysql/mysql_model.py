@@ -30,3 +30,8 @@ class diagnose_trigger(Base):
     plc_id = Column(Integer, primary_key=True, index=True)
     time = Column(DateTime)
     energy_flag = Column(Integer)
+
+class diagnosed_date(Base):
+    __tablename__ = 'diagnosed_date'
+    Date = Column(DateTime, primary_key=True, index=True)
+

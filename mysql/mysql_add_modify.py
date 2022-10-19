@@ -54,3 +54,19 @@ class mysql_add_modify():
                 mysql_session.close()
             else:
                 print('PLC_ID ' + str(plc) + ' has more than one segment of data.')
+    
+    def Date(t):
+        mysql_session = get_session()
+        query = mysql_session.query(diagnosed_date).all()
+        if len(query) == 1:
+            mysql_session.query(diagnosed_date).update({'Date':t})
+            mysql_session.commit()
+            mysql_session.close()
+        else:
+            if len(query) < 1:
+                add = diagnosed_date(Date=t)
+                mysql_session.add(add)
+                mysql_session.commit()
+                mysql_session.close()
+            else:
+                print('It has more than one segment of data.')

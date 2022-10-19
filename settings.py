@@ -14,7 +14,7 @@ fmt3 = "%Y-%m-%d"
 # diagnose_trigger_service
 seconds_interval = 3600
 # time_rigger()
-specified_time = '17:01:00'
+specified_time = '23:00:00'
 
 # Mongodb connecting
 MONGO_HOST = 'dds-8vb381a9f7b950b43984-pub.mongodb.zhangbei.rds.aliyuncs.com'
@@ -67,6 +67,9 @@ SigmaX0 = [1e-6, 1e-8, 2e-4]
 # SigmaX0 = [1e-6, 1e-6, 1e-6, 1e-8, 2e-4]
 SigmaV = 2e-1
 SigmaW = 2e-1
+
+# diagnose_switch
+diagnose_days_interval = 1
 
 # Query request
 filter_for_data_collection = {
