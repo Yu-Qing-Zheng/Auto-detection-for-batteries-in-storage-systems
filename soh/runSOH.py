@@ -27,16 +27,15 @@ def runSOH(df):
     input_y = -(dt*eta*curr)[:-1]
     input_x = diff_soc[1:]
     maxI = np.max(np.abs(curr))
-    precisionI = 2**10
-    m = 300
-    binsize = 2*maxI/precisionI
+    binsize = 2*maxI/settings.precisionI
     n = input_x.shape[0]
     rn1 = np.ones((n), dtype=float)
     theCase = 1
     if theCase == 1:
         rn2 = rn1
-        sy = binsize*np.sqrt(m/12)/3600*rn2
-    socnoise = np.sqrt(2)*0.03
+        sy = binsize*np.sqrt(settings.m/12)/3600*rn2
+    # socnoise = np.sqrt(2)*0.03
+    socnoise = df['SOCBound'].values
     sx = socnoise*rn1
     Qnom = np.mean(Q[np.where(Q>0)])
     gamma = 1#-10**(-4)
@@ -46,5 +45,5 @@ def runSOH(df):
     SigmaQ = collection[1]
     SigmaQ = SigmaQ[:, settings.id_awtls]
     df['SOH'] = np.append(np.nan, Q_hat)
-    df['SOCBound'] = np.sqrt(np.append(np.nan, SigmaQ))
+    df['SOHBound'] = np.sqrt(np.append(np.nan, SigmaQ))
     return df
