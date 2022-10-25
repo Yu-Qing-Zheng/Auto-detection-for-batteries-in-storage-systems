@@ -68,6 +68,12 @@ SigmaX0 = [1e-6, 1e-8, 2e-4]
 SigmaV = 2e-1
 SigmaW = 2e-1
 
+# soh
+id_wls = 0
+id_wtls = 1
+id_rtls = 2
+id_awtls = 3
+
 # diagnose_switch
 diagnose_days_interval = 1
 
