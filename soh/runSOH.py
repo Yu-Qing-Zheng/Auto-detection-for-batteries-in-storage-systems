@@ -35,15 +35,17 @@ def runSOH(df):
         rn2 = rn1
         sy = binsize*np.sqrt(settings.m/12)/3600*rn2
     # socnoise = np.sqrt(2)*0.03
-    socnoise = df['SOCBound'].values
+    sigma_soc = df['SOCBound'].values
+    socnoise = np.zeros(np.size(input_x))# df['SOCBound'].values[1:]
+    for i in range(1, df.shape[0]):
+        socnoise[i-1] = np.sqrt(sigma_soc[i-1]**2 + sigma_soc[i]**2)
     sx = socnoise*rn1
     Qnom = np.mean(Q[np.where(Q>0)])
-    gamma = 1#-10**(-4)
-    collection = xLSalgos(input_x, input_y, sx**2, sy**2, gamma, Qnom)
+    collection = xLSalgos(input_x, input_y, sx**2, sy**2, settings.gamma, Qnom)
     Q_hat = collection[0]
     Q_hat = Q_hat[:, settings.id_awtls]
     SigmaQ = collection[1]
     SigmaQ = SigmaQ[:, settings.id_awtls]
-    df['SOH'] = np.append(np.nan, Q_hat)
-    df['SOHBound'] = np.sqrt(np.append(np.nan, SigmaQ))
+    df['SOH'] = np.append(0, Q_hat)
+    df['SOHBound'] = 3*np.sqrt(np.append(0, SigmaQ))
     return df

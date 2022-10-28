@@ -19,7 +19,7 @@ def diagnose_switch():
             diagnose_switch = 0
     else:
         if len(diag_date) == 1:
-            priorDate = diag_date[0]
+            priorDate = diag_date[0].Date
             Date_diff = (now_time - priorDate).days
             if Date_diff >= settings.diagnose_days_interval and now_time.hour >= timegate.hour:
                 diagnose_switch = 1

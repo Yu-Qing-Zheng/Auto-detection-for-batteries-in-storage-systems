@@ -4,7 +4,7 @@
 """
 
 from sqlalchemy.orm import declarative_base, sessionmaker
-from sqlalchemy import Column, Integer, DateTime, create_engine, Float
+from sqlalchemy import Column, Integer, DateTime, create_engine, Float, String
 
 engine = create_engine('mysql+pymysql://root:123456@47.92.133.142:3306/data_preprocessing?charset=utf8',
                        pool_size=30,
@@ -35,3 +35,15 @@ class diagnosed_date(Base):
     __tablename__ = 'diagnosed_date'
     Date = Column(DateTime, primary_key=True, index=True)
 
+class diagnose_results(Base):
+    __tablename__ = 'diagnose_results'
+    plc_id = Column(Integer, primary_key=True, index=True)
+    time = Column(DateTime)
+    bat_id = Column(String(255))
+    voltage = Column(Float)
+    current = Column(Float)
+    temperature = Column(Float)
+    soc = Column(Float)
+    soc_bound = Column(Float)
+    soh = Column(Float)
+    soh_bound = Column(Float)

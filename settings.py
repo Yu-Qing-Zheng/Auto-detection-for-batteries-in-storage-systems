@@ -26,7 +26,7 @@ MONGO_AUTH_SOURCE = 'admin'
 
 # energy_trigger
 day_threshold = 7
-day_interval = 2
+day_interval = 1
 threshold_factor = 0.8
 restored_threshold_factor = 2
 time_fill1 = ' 00:00:00'
@@ -73,6 +73,9 @@ id_wls = 0
 id_wtls = 1
 id_rtls = 2
 id_awtls = 3
+precisionI = 2**10
+m = 300
+gamma = 1#-10**(-4)
 
 # diagnose_switch
 diagnose_days_interval = 1
