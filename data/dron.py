@@ -132,6 +132,7 @@ class dron:
         bat_to_check = []
         df_data = dron.dataframe_switch(plc)
         df_data['time'] = pd.to_datetime(df_data['time'])
+        df_bat_to_check = pd.DataFrame(columns=['time', 'Voltage.name', 'Voltage', 'Current', 'Temperature'])
         if df_data.shape[0] > 0:
             time_set = df_data['time'].unique()
             df_ab_bat = pd.DataFrame()
@@ -176,7 +177,7 @@ class dron:
             df_bat_to_check = df_bat_to_check.sort_values(by='time', ascending=True)
             df_bat_to_check = df_bat_to_check.reset_index(drop=True)
             # df_bat_to_check = df_data[df_data['Voltage.name'].isin(bat_to_check)]
-            return df_bat_to_check
+        return df_bat_to_check
         
         
         # if df_data.shape[0] > 0:

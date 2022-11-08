@@ -5,6 +5,28 @@ import warnings
 warnings.filterwarnings('ignore')
 
 def xLSalgos(measX, measY, SigmaX, SigmaY, gamma, Qnom):
+
+    # if len(np.where(abs(SigmaX) > 0)[0]) > 0:
+    #     median_SigmaX = np.median(SigmaX[np.where(abs(SigmaX) > 0)])
+    # else:
+    #     median_SigmaX = 0.03
+    # # median_SigmaX = np.median(SigmaX[np.where(abs(SigmaX) > 0)])
+    # if len(np.where(abs(SigmaY) > 0)[0]) > 0:
+    #     median_SigmaY = np.median(SigmaY[np.where(abs(SigmaY) > 0)])
+    # else:
+    #     median_SigmaY = 10e-10
+    # for i in range(0, len(SigmaX)):
+    #     if abs(SigmaX[i]) > 0:
+    #         pass
+    #     else:
+    #         SigmaX[i] = median_SigmaX
+    # for i in range(0, len(SigmaY)):
+    #     if abs(SigmaY[i]) > 0:
+    #         pass
+    #     else:
+    #         SigmaY[i] = median_SigmaY
+
+    # K = np.sqrt(median_SigmaX/median_SigmaY)
     K = np.sqrt(SigmaX[0]/SigmaY[0])
     Qhat = np.zeros((len(measX),4))
     SigmaQ = np.zeros((len(measX),4))
@@ -51,6 +73,18 @@ def xLSalgos(measX, measY, SigmaX, SigmaY, gamma, Qnom):
         C4 = gamma*C4 + measX[iter]**2/SigmaX[iter]
         C5 = gamma*C5 + K*measX[iter]*measY[iter]/SigmaX[iter]
         C6 = gamma*C6 + K**2*measY[iter]**2/SigmaX[iter]
+        # print('K:', K)
+        # print('median_SigmaX:', median_SigmaX)
+        # print('median_SigmaY:', median_SigmaY)
+        # print('measX[iter]:', measX[iter])
+        # print('measY[iter]:', measY[iter])
+        # print('SigmaX[iter]', SigmaX[iter])
+        # print('SigmaY[iter]', SigmaY[iter])
+        # print('C1:', C1)
+        # print('C2:', C2)
+        # print('C3:', C3)
+        # print('C4:', C4)
+        # print('C5:', C5)
 
         # Method 1: WLS
         #print('---Method 1---')

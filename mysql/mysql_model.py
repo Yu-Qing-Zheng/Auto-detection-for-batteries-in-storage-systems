@@ -35,11 +35,12 @@ class diagnosed_date(Base):
     __tablename__ = 'diagnosed_date'
     Date = Column(DateTime, primary_key=True, index=True)
 
-class diagnose_results(Base):
-    __tablename__ = 'diagnose_results'
-    plc_id = Column(Integer, primary_key=True, index=True)
+class sox_calculation(Base):
+    __tablename__ = 'sox_calculation'
+    ind = Column(Integer, primary_key=True, index=True)
+    plc_id = Column(Integer)
+    bat_id = Column(String(16))
     time = Column(DateTime)
-    bat_id = Column(String(255))
     voltage = Column(Float)
     current = Column(Float)
     temperature = Column(Float)
@@ -47,3 +48,24 @@ class diagnose_results(Base):
     soc_bound = Column(Float)
     soh = Column(Float)
     soh_bound = Column(Float)
+
+class diff_sox(Base):
+    __tablename__ = 'diff_sox'
+    ind = Column(Integer, primary_key=True, index=True)
+    plc_id = Column(Integer)
+    bat_id = Column(String(16))
+    time = Column(DateTime)
+    voltage = Column(Float)
+    soc = Column(Float)
+    soc_bound = Column(Float)
+    soh = Column(Float)
+    soh_bound = Column(Float)
+    voltage_bench = Column(Float)
+    soc_bench = Column(Float)
+    soc_bound_bench = Column(Float)
+    soh_bench = Column(Float)
+    soh_bound_bench = Column(Float)
+    diff_soc = Column(Float)
+    diff_soc_bound = Column(Float)
+    diff_soh = Column(Float)
+    diff_soh_bound = Column(Float)

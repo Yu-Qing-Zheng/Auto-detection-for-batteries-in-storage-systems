@@ -27,6 +27,8 @@ def runSOH(df):
     input_y = -(dt*eta*curr)[:-1]
     input_x = diff_soc[1:]
     maxI = np.max(np.abs(curr))
+    if maxI < 10:
+        maxI = 70
     binsize = 2*maxI/settings.precisionI
     n = input_x.shape[0]
     rn1 = np.ones((n), dtype=float)
@@ -35,7 +37,7 @@ def runSOH(df):
         rn2 = rn1
         sy = binsize*np.sqrt(settings.m/12)/3600*rn2
     # socnoise = np.sqrt(2)*0.03
-    sigma_soc = df['SOCBound'].values
+    sigma_soc = df['SOCBound'].values/3
     socnoise = np.zeros(np.size(input_x))# df['SOCBound'].values[1:]
     for i in range(1, df.shape[0]):
         socnoise[i-1] = np.sqrt(sigma_soc[i-1]**2 + sigma_soc[i]**2)
