@@ -57,6 +57,7 @@ class mysql_add_modify():
             else:
                 print('PLC_ID ' + str(plc) + ' has more than one segment of data.')
     
+    @staticmethod
     def Date(t):
         mysql_session = get_session()
         query = mysql_session.query(diagnosed_date).all()
@@ -72,6 +73,13 @@ class mysql_add_modify():
                 mysql_session.close()
             else:
                 print('It has more than one segment of data.')
+
+    @staticmethod
+    def empty_Date():
+        mysql_session = get_session()
+        mysql_session.query(diagnosed_date).delete()
+        mysql_session.commit()
+        mysql_session.close()
 
     @staticmethod
     def results_outdated(df):
@@ -240,5 +248,37 @@ class mysql_add_modify():
     def empty_diff_sox():
         mysql_session = get_session()
         mysql_session.query(diff_sox).delete()
+        mysql_session.commit()
+        mysql_session.close()
+    
+    @staticmethod
+    def final_conclusions(df):
+        df = df.sort_values(by='plc_id', ascending=True)
+        df = df.reset_index(drop=True)
+        num = df.shape[0]
+        df_tosql = df
+        df_tosql.to_sql(
+                        'final_conclusions', 
+                        con=engine, 
+                        schema='data_preprocessing', 
+                        index=False, 
+                        index_label=False, 
+                        if_exists='replace', 
+                        chunksize=num,
+                        dtype={
+                               'ind': sqlalchemy.types.Integer(),
+                               'plc_id': sqlalchemy.types.Integer(),
+                               'bat_id': sqlalchemy.types.VARCHAR(length=16),
+                               'dsoc': sqlalchemy.types.Float(),
+                               'dsoh': sqlalchemy.types.Float(),
+                              }
+                        )
+        with engine.connect() as con:
+            con.execute('ALTER TABLE `final_conclusions` ADD PRIMARY KEY (`ind`);')
+    
+    @staticmethod
+    def empty_conclusions():
+        mysql_session = get_session()
+        mysql_session.query(final_conclusions).delete()
         mysql_session.commit()
         mysql_session.close()

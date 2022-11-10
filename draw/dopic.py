@@ -1,13 +1,27 @@
 from mysql.mysql_model import *
 import importlib
+import os
+import shutil
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.dates import AutoDateLocator, ConciseDateFormatter
 
 class dopic:
-    
     @staticmethod
-    def dsoc():
+    def checkfile():
+        # try:
+        settings = importlib.import_module('settings')
+        if os.path.exists(settings.figpath):
+            shutil.rmtree(settings.figpath)
+            os.mkdir(settings.figpath)
+        else:
+            os.mkdir(settings.figpath)
+        # except:
+        #     print('error on checkfile.')
+
+    @staticmethod
+    def dsox():
+        # try:
         settings = importlib.import_module('settings')
         mysql_session = get_session()
         data_query = mysql_session.query(diff_sox).all()
@@ -48,7 +62,7 @@ class dopic:
                     else:
                         # print('bat_id:', thebat)
                         df_1p_1b = df_1p[df_1p['bat_id'].isin([thebat])]
-                        figname = str(plc)+thebat+'.png'
+                        figname = str(plc)+'_'+thebat+'.png'
                         fig, (ax_v, ax_z, ax_h) = plt.subplots(3, 1, dpi=600, sharex=True)
                         x_t = df_1p_1b['time'].values
                         y_v = df_1p_1b['voltage'].values
@@ -79,8 +93,12 @@ class dopic:
                         ax_h.grid(color = 'k', ls = '-.', lw = 0.5)
                         plt.savefig(settings.figpath+figname)
 
+        # except:
+        #     print('error on dsox.')
+
     @staticmethod
     def packpic():
+        # try:
         settings = importlib.import_module('settings')
         mysql_session = get_session()
         data_query = mysql_session.query(sox_calculation).all()
@@ -130,4 +148,5 @@ class dopic:
                 ax_z.xaxis.set_major_locator(locator)
                 ax_z.xaxis.set_major_formatter(ConciseDateFormatter(locator))
                 plt.savefig(settings.figpath+figname)
-
+        # except:
+        #     print('error on packpic.')

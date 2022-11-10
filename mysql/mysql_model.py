@@ -69,3 +69,11 @@ class diff_sox(Base):
     diff_soc_bound = Column(Float)
     diff_soh = Column(Float)
     diff_soh_bound = Column(Float)
+
+class final_conclusions(Base):
+    __tablename__ = 'final_conclusions'
+    ind = Column(Integer, primary_key=True, index=True)
+    plc_id = Column(Integer)
+    bat_id = Column(String(16))
+    dsoc = Column(Float)
+    dsoh = Column(Float)
