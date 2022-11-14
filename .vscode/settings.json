@@ -12,6 +12,19 @@
             "database": "data_preprocessing",
             "username": "root",
             "password": "123456"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "previewLimit": 50,
+            "server": "47.92.133.142",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "data_preprocessing",
+            "database": "data_preprocessing",
+            "username": "root",
+            "password": "123456"
         }
     ]
 }

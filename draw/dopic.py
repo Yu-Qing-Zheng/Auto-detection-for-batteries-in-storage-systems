@@ -1,4 +1,5 @@
 from mysql.mysql_model import *
+from mysql.mysql_to_df import mysql_to_df
 import importlib
 import os
 import shutil
@@ -23,33 +24,36 @@ class dopic:
     def dsox():
         # try:
         settings = importlib.import_module('settings')
-        mysql_session = get_session()
-        data_query = mysql_session.query(diff_sox).all()
-        mysql_session.close()
-        if len(data_query) == 0:
+        df_data = mysql_to_df('diff_sox')
+        # plc_set = df_all['plc_id'].unique()
+        # mysql_session = get_session()
+        # data_query = mysql_session.query(diff_sox).all()
+        # mysql_session.close()
+        # if len(data_query) == 0:
+        if df_data.shape[0] == 0:
             pass
         else:
-            df_data = pd.DataFrame()
-            for i in range(0, len(data_query)):
-                data_series = {'time': data_query[i].time}
-                data_series.update({'plc_id': data_query[i].plc_id})
-                data_series.update({'bat_id': data_query[i].bat_id})
-                data_series.update({'voltage': data_query[i].voltage})
-                data_series.update({'soc': data_query[i].soc})
-                data_series.update({'soc_bound': data_query[i].soc_bound})
-                data_series.update({'soh': data_query[i].soh})
-                data_series.update({'soh_bound': data_query[i].soh_bound})
-                data_series.update({'voltage_bench': data_query[i].voltage_bench})
-                data_series.update({'soc_bench': data_query[i].soc_bench})
-                data_series.update({'soc_bound_bench': data_query[i].soc_bound_bench})
-                data_series.update({'soh_bench': data_query[i].soh_bench})
-                data_series.update({'soh_bound_bench': data_query[i].soh_bound_bench})
-                data_series.update({'diff_soc': data_query[i].diff_soc})
-                data_series.update({'diff_soc_bound': data_query[i].diff_soc_bound})
-                data_series.update({'diff_soh': data_query[i].diff_soh})
-                data_series.update({'diff_soh_bound': data_query[i].diff_soh_bound})
-                to_append_to_data = pd.DataFrame(data_series, index=[0])
-                df_data = pd.concat([df_data, to_append_to_data], axis=0)
+            # df_data = pd.DataFrame()
+            # for i in range(0, len(data_query)):
+            #     data_series = {'time': data_query[i].time}
+            #     data_series.update({'plc_id': data_query[i].plc_id})
+            #     data_series.update({'bat_id': data_query[i].bat_id})
+            #     data_series.update({'voltage': data_query[i].voltage})
+            #     data_series.update({'soc': data_query[i].soc})
+            #     data_series.update({'soc_bound': data_query[i].soc_bound})
+            #     data_series.update({'soh': data_query[i].soh})
+            #     data_series.update({'soh_bound': data_query[i].soh_bound})
+            #     data_series.update({'voltage_bench': data_query[i].voltage_bench})
+            #     data_series.update({'soc_bench': data_query[i].soc_bench})
+            #     data_series.update({'soc_bound_bench': data_query[i].soc_bound_bench})
+            #     data_series.update({'soh_bench': data_query[i].soh_bench})
+            #     data_series.update({'soh_bound_bench': data_query[i].soh_bound_bench})
+            #     data_series.update({'diff_soc': data_query[i].diff_soc})
+            #     data_series.update({'diff_soc_bound': data_query[i].diff_soc_bound})
+            #     data_series.update({'diff_soh': data_query[i].diff_soh})
+            #     data_series.update({'diff_soh_bound': data_query[i].diff_soh_bound})
+            #     to_append_to_data = pd.DataFrame(data_series, index=[0])
+            #     df_data = pd.concat([df_data, to_append_to_data], axis=0)
             df_data = df_data.sort_values(by='time', ascending=True)
             df_data = df_data.reset_index(drop=True)
             plc_set = df_data['plc_id'].unique()
@@ -92,7 +96,7 @@ class dopic:
                         ax_h.legend()
                         ax_h.grid(color = 'k', ls = '-.', lw = 0.5)
                         plt.savefig(settings.figpath+figname)
-
+                        plt.close()
         # except:
         #     print('error on dsox.')
 
@@ -100,30 +104,32 @@ class dopic:
     def packpic():
         # try:
         settings = importlib.import_module('settings')
-        mysql_session = get_session()
-        data_query = mysql_session.query(sox_calculation).all()
-        mysql_session.close()
-        if len(data_query) == 0:
+        df_data = mysql_to_df('sox_calculation')
+        # mysql_session = get_session()
+        # data_query = mysql_session.query(sox_calculation).all()
+        # mysql_session.close()
+        # if len(data_query) == 0:
+        if df_data.shape[0] == 0:
             pass
         else:
-            df_data = pd.DataFrame()
-            for i in range(0, len(data_query)):
-                data_series = {'time': data_query[i].time}
-                data_series.update({'plc_id': data_query[i].plc_id})
-                data_series.update({'bat_id': data_query[i].bat_id})
-                data_series.update({'voltage': data_query[i].voltage})
-                data_series.update({'soc': data_query[i].soc})
-                data_series.update({'soc_bound': data_query[i].soc_bound})
-                data_series.update({'soh': data_query[i].soh})
-                data_series.update({'soh_bound': data_query[i].soh_bound})
-                to_append_to_data = pd.DataFrame(data_series, index=[0])
-                df_data = pd.concat([df_data, to_append_to_data], axis=0)
+            # df_data = pd.DataFrame()
+            # for i in range(0, len(data_query)):
+            #     data_series = {'time': data_query[i].time}
+            #     data_series.update({'plc_id': data_query[i].plc_id})
+            #     data_series.update({'bat_id': data_query[i].bat_id})
+            #     data_series.update({'voltage': data_query[i].voltage})
+            #     data_series.update({'soc': data_query[i].soc})
+            #     data_series.update({'soc_bound': data_query[i].soc_bound})
+            #     data_series.update({'soh': data_query[i].soh})
+            #     data_series.update({'soh_bound': data_query[i].soh_bound})
+            #     to_append_to_data = pd.DataFrame(data_series, index=[0])
+            #     df_data = pd.concat([df_data, to_append_to_data], axis=0)
             df_data = df_data.sort_values(by='time', ascending=True)
             df_data = df_data.reset_index(drop=True)
             plc_set = df_data['plc_id'].unique()
             for plc in plc_set:
                 df_1p = df_data[df_data['plc_id'].isin([plc])]
-                fig, (ax_v, ax_z) = plt.subplots(2, 1, dpi=600)
+                fig, (ax_v, ax_z) = plt.subplots(2, 1, dpi=600, sharex=True)
                 figname = str(plc) + '_packs.png'
                 for i in range(1, settings.pack_num+1):
                     thebat = 'median_' + str(i)
@@ -134,7 +140,7 @@ class dopic:
                     y_z = df_1p_median['soc'].values
                     ax_v.plot(x_t, y_v, label = 'Pack ' + str(i))
                     ax_z.plot(x_t, y_z, label = 'Pack ' + str(i))
-                ax_v.set_xlabel('Time')
+                # ax_v.set_xlabel('Time')
                 ax_v.set_ylabel('Voltage')
                 ax_v.grid(True)
                 # ax_v.legend()
@@ -148,5 +154,6 @@ class dopic:
                 ax_z.xaxis.set_major_locator(locator)
                 ax_z.xaxis.set_major_formatter(ConciseDateFormatter(locator))
                 plt.savefig(settings.figpath+figname)
+                plt.close()
         # except:
         #     print('error on packpic.')
