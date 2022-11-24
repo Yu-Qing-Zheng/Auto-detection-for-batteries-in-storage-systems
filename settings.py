@@ -85,7 +85,7 @@ ratio_for_conclusion = 0.2
 dsoc_threshold = 0.05
 
 # diagnose_switch
-diagnose_days_interval = 1
+diagnose_days_interval = 2
 do_diagnose = 1
 diagnose_loop_interval = 1 # hour
 

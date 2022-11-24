@@ -24,6 +24,8 @@ class energy_threshold(Base):
     time = Column(DateTime)
     median_max_forward = Column(Float)
     median_max_reverse = Column(Float)
+    max_forward = Column(Float)
+    max_reverse = Column(Float)
 
 class diagnose_trigger(Base):
     __tablename__ = 'diagnose_trigger'

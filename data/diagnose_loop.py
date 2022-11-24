@@ -8,11 +8,10 @@ import importlib
 
 def diagnose_loop():
     settings = importlib.import_module('settings')
+    importlib.reload(settings)
     when_to_next = datetime.datetime.now()
     while settings.do_diagnose == 1:
         now_time_ts = datetime.datetime.now()
-        # time_diff = round((now_time_ts - when_to_next).seconds, 4)
-        # print('time_diff:', time_diff)
         print('Start a new loop:', now_time_ts)
         diagnose_flag = diagnose_begin_switch()
         if diagnose_flag == 1:

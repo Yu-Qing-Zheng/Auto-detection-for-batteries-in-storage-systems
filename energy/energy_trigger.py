@@ -53,6 +53,7 @@ def energy_trigger(plc):
         if len(max_e_list) > 0:
             forward_now = max_e_list[0]
             reverse_now = max_e_list[1]
+            mysql_add_modify.current_threshold(plc[0], forward_now, reverse_now, now_time_ts)
             print(start_time_ts, now_time_ts)
             if len(thres_parameter) > 0:
                 # median_max_f = thres_parameter[0]["median_max_forward"]
