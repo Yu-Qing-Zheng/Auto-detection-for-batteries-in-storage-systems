@@ -1,10 +1,10 @@
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Column, Integer, DateTime, create_engine, Float, String
 
-engine = create_engine('mysql+pymysql://root:tmrdatapreprocessing@47.92.133.142:3306/data_preprocessing?charset=utf8',
-                       pool_size=30,
-                       pool_timeout=3,
-                       pool_recycle=60)
+engine = create_engine('',
+                       pool_size=,
+                       pool_timeout=,
+                       pool_recycle=)
 Base = declarative_base()
 
 
