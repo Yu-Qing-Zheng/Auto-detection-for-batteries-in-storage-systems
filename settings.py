@@ -16,12 +16,12 @@ seconds_interval = 3600
 specified_time = '23:00:00'
 
 # Mongodb connecting
-MONGO_HOST = 'dds-8vb381a9f7b950b43984-pub.mongodb.zhangbei.rds.aliyuncs.com'
-MONGO_PORT = 3717
-MONGO_DB_NAME = 'dems'
-MONGO_USERNAME = 'root'
-MONGO_PWD = 'TMRenergy!'
-MONGO_AUTH_SOURCE = 'admin'
+MONGO_HOST = 
+MONGO_PORT = 
+MONGO_DB_NAME = 
+MONGO_USERNAME = 
+MONGO_PWD = 
+MONGO_AUTH_SOURCE = 
 
 # energy_trigger
 day_threshold = 7
@@ -46,8 +46,8 @@ plc_csv_file = 'plc_list.csv'
 plc_query_control_file = 'last_update.txt'
 
 # chatbot
-energy_trigger_sender_webhook = 'https://oapi.dingtalk.com/robot/send?access_token=c8c02777586007e8ec0d1b175d8a3ca773fcf730b9d3a5dfde036935e3102d47'
-energy_trigger_sender_secret = 'SECe5b022bf14b2440432177f5f040593c3d8c14467cfc59a52e6ee44fdc782c1d3'
+energy_trigger_sender_webhook = 
+energy_trigger_sender_secret = 
 bot_query_dayrange = 1
 chatrobot_switch = 0
 
