@@ -15,8 +15,8 @@ def median_energy_calculate(start_time, end_time, plc):
     start_time = datetime.datetime.strptime(start_time,settings.fmt1)
     end_time = datetime.datetime.strptime(end_time, settings.fmt1)
     data = query_request.datalog_query(start_time, end_time, plc, settings.filter_for_energy_calculation)
-    current_factor = current_parameter(plc)[0]
-    current_threshold = current_parameter(plc)[1]
+    current_factor = current_parameter(plc[0])[0]
+    current_threshold = current_parameter(plc[0])[1]
     med_results = []
     if len(data) > 0:
         time_set = []
@@ -33,7 +33,7 @@ def median_energy_calculate(start_time, end_time, plc):
         data_df['current'] = I_set
         data_df['forward'] = forward
         data_df['reverse'] = reverse
-        if data_df[abs(data_df['current'])>=current_threshold].shape[0] > 0:
+        if data_df[abs(data_df['current'])>current_threshold].shape[0] > 0:
             I_index = data_df.columns.get_loc('current')
             # t_index = data_df.columns.get_loc('time')
             # f_index = data_df.columns.get_loc('forward')

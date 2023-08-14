@@ -1,12 +1,7 @@
-"""
-# @Author: ZeKai
-# @Date: 2022-03-07
-"""
-
 from sqlalchemy.orm import declarative_base, sessionmaker
 from sqlalchemy import Column, Integer, DateTime, create_engine, Float, String
 
-engine = create_engine('mysql+pymysql://root:123456@47.92.133.142:3306/data_preprocessing?charset=utf8',
+engine = create_engine('mysql+pymysql://root:tmrdatapreprocessing@47.92.133.142:3306/data_preprocessing?charset=utf8',
                        pool_size=30,
                        pool_timeout=3,
                        pool_recycle=60)

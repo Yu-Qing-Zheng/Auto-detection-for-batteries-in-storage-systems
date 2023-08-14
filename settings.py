@@ -12,7 +12,7 @@ fmt3 = "%Y-%m-%d"
 
 # diagnose_trigger_service
 seconds_interval = 3600
-# time_rigger()
+# time_trigger()
 specified_time = '23:00:00'
 
 # Mongodb connecting

@@ -24,7 +24,7 @@
             "name": "data_preprocessing",
             "database": "data_preprocessing",
             "username": "root",
-            "password": "123456"
+            "password": "tmrdatapreprocessing"
         }
     ]
 }

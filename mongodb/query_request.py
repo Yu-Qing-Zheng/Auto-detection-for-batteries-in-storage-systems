@@ -28,7 +28,7 @@ class query_request:
                 data_filter
             ]
             query_result = Datalog._get_collection().aggregate(aggregate_query)
-            print('***data queried!***')
+            # print('***data queried!***')
             return list(query_result)
         except:
             print('no datalog downloaded!')
@@ -58,7 +58,7 @@ class query_request:
                 data_filter
             ]
             query_result = energy_threshold_log._get_collection().aggregate(aggregate_query)
-            print('***threshold queried!***')
+            # print('***threshold queried!***')
             return list(query_result)
         except:
             print('no threshold downloaded!')
@@ -88,7 +88,7 @@ class query_request:
                 data_filter
             ]
             query_result = energy_trigger_log._get_collection().aggregate(aggregate_query)
-            print('***trigger queried!***')
+            # print('***trigger queried!***')
             return list(query_result)
         except:
             print('no trigger downloaded!')

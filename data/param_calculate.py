@@ -13,7 +13,7 @@ class param_calculate:
     @staticmethod
     def sox_upload():
         settings = importlib.import_module('settings')
-        plc_set = [40]
+        plc_set = [75]
         df_plc = mysql_to_df('diagnose_trigger')
         plc_set = df_plc['plc_id'].unique()
         df_all = pd.DataFrame()

@@ -18,8 +18,8 @@ def maximum_energy_calculate(plc):
     start_time = datetime.datetime.strptime(ts,settings.fmt1) - datetime.timedelta(days=settings.day_interval)
     end_time = datetime.datetime.strptime(ts,settings.fmt1)
     data = query_request.datalog_query(start_time, end_time, plc, settings.filter_for_energy_calculation)
-    current_factor = current_parameter(plc)[0]
-    current_threshold = current_parameter(plc)[1]
+    current_factor = current_parameter(plc[0])[0]
+    current_threshold = current_parameter(plc[0])[1]
     max_results = []
     if len(data) > 0:
         time_set = []
@@ -48,7 +48,7 @@ def maximum_energy_calculate(plc):
             data_df_static = pd.DataFrame()
             # data_df = data_df.sort_values(by='time', ascending=True)
             data_df = data_df.reset_index(drop=True)
-            start = data_df[abs(data_df['current'])>=current_threshold].index.values[0]
+            start = data_df[abs(data_df['current'])>current_threshold].index.values[0]
             end = data_df.shape[0]
 
             for i in range(start, end):

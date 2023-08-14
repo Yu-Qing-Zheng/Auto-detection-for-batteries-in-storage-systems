@@ -10,7 +10,7 @@ def mongo_connect():
     try:
         connect(settings.MONGO_DB_NAME, host=settings.MONGO_HOST, port=settings.MONGO_PORT, username=settings.MONGO_USERNAME,
                     password=settings.MONGO_PWD, authentication_source=settings.MONGO_AUTH_SOURCE, connect=True)
-        print('***connected!***')
+        # print('***connected!***')
     except:
         print('connection failed!')
     # except Exception as e:
