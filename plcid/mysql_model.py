@@ -1,15 +1,10 @@
-"""
-# @Author: ZeKai
-# @Date: 2022-03-07
-"""
-
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, FetchedValue, create_engine, Float
 
-engine = create_engine('mysql+pymysql://root:Tmr84937686!@47.92.252.35:3307/dems_Prime_test?charset=utf8',
-                       pool_size=30,
-                       pool_timeout=3,
-                       pool_recycle=60)
+engine = create_engine('',
+                       pool_size=,
+                       pool_timeout=,
+                       pool_recycle=)
 Base = declarative_base()
 
 
